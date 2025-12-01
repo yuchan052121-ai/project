@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>{{ title or "口コミシステム" }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header>
+    <h1><a href="{{ url_for('index') }}">筑波大学 社会工学類 口コミ</a></h1>
+    <nav>
+      <a href="{{ url_for('index') }}">コース一覧</a>
+    </nav>
+    <hr>
+  </header>
+  <main>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class="flashes">
+          {% for m in messages %}
+            <li>{{ m }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+  <footer>
+    <hr>
+    <small>デモ用 — セキュリティや認証は適宜実装してください。</small>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2>科目一覧</h2>
+<table class="courses">
+  <thead><tr><th>コード</th><th>科目名</th><th>操作</th></tr></thead>
+  <tbody>
+  {% for c in courses %}
+    <tr>
+      <td>{{ c['code'] }}</td>
+      <td>{{ c['title'] }}</td>
+      <td><a href="{{ url_for('course_view', course_id=c['id']) }}">見る</a> |
+          <a href="{{ url_for('add_review', course_id=c['id']) }}">レビューを書く</a></td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
