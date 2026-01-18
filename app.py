@@ -1,3 +1,9 @@
+import os
+from init_db import init_db
+
+if not os.path.exists("reviews.db"):
+    init_db()
+
 from flask import Flask, g, render_template, request, redirect, url_for, flash
 import sqlite3
 import hashlib
