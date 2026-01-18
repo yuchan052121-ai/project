@@ -18,8 +18,10 @@ for _, row in df.iterrows():
             row["標準履修年次"],
             row["時間割"]
         ))
-    except:
-        pass
+    except Exception as e:
+        print("Error:", e)
+        print("Row:", row)
+        raise
 
 conn.commit()
 conn.close()
