@@ -9,3 +9,4 @@ header h1 a { text-decoration: none; color: #222; }
 .flashes { list-style: none; padding: 6px; background: #fffbeb; border: 1px solid #ffe5a1; }
 .pager { margin-top: 12px; }
 .pager a { text-decoration: none; margin: 0 8px; }
+form label { display: block; margin: 6px 0; }
