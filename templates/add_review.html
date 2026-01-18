@@ -1,99 +1,38 @@
 {% extends "layout.html" %}
 {% block content %}
+<h2>{{ course.code }} {{ course.title }}</h2>
 
-<h2>レビューを書く — {{ course['code'] }} {{ course['title'] }}</h2>
+<form method="post">
+  <label>名前 <input name="name" required></label><br>
 
-<form method="post" action="{{ url_for('add_review', course_id=course['id']) }}">
-
-  <!-- 名前 -->
-  <label>
-    名前（任意）:
-    <input name="name" required>
-  </label>
-  <br><br>
-
-  <!-- 星評価：おすすめ -->
-  <label>
-    おすすめ:
-    <select name="recommend" required>
+  {% for f,label in [
+    ('recommend','おすすめ度'),
+    ('difficulty','単位取得難易度'),
+    ('fun','楽しさ'),
+    ('learning','学び')
+  ] %}
+  <label>{{ label }}
+    <select name="{{ f }}" required>
       <option value="">選択</option>
-      {% for i in [5,4,3,2,1] %}
+      {% for i in range(5,0,-1) %}
         <option value="{{ i }}">{{ i }}</option>
       {% endfor %}
     </select>
-  </label>
-  <br>
+  </label><br>
+  {% endfor %}
 
-  <!-- 星評価：単位取得難易度 -->
-  <label>
-    難易度:
-    <select name="difficulty" required>
-      <option value="">選択</option>
-      {% for i in [5,4,3,2,1] %}
-        <option value="{{ i }}">{{ i }}</option>
-      {% endfor %}
-    </select>
-  </label>
-  <br>
+  <label>出席必須 <input type="checkbox" name="attendance"></label><br>
 
-  <!-- 星評価：楽しさ -->
-  <label>
-    楽しさ:
-    <select name="fun" required>
-      <option value="">選択</option>
-      {% for i in [5,4,3,2,1] %}
-        <option value="{{ i }}">{{ i }}</option>
-      {% endfor %}
-    </select>
-  </label>
-  <br>
-
-  <!-- 星評価：学び -->
-  <label>
-    学び:
-    <select name="learning" required>
-      <option value="">選択</option>
-      {% for i in [5,4,3,2,1] %}
-        <option value="{{ i }}">{{ i }}</option>
-      {% endfor %}
-    </select>
-  </label>
-
-  <br><br>
-
-  <!-- 出席 -->
-  <label>
-    出席必須:
-    <input type="checkbox" name="attendance">
-  </label>
-  <br>
-
-  <!-- 試験形式 -->
-  <label>
-    試験形式:
+  <label>試験形式
     <select name="assessment">
-      <option value="テスト">テスト</option>
-      <option value="レポート">レポート</option>
-      <option value="両方">両方</option>
-      <option value="なし">なし</option>
+      <option>テスト</option>
+      <option>レポート</option>
+      <option>両方</option>
+      <option>なし</option>
     </select>
-  </label>
+  </label><br>
 
-  <br><br>
-
-  <!-- コメント -->
-  <label>
-    コメント:<br>
-    <textarea name="comment" rows="6" cols="60" required></textarea>
-  </label>
-
-  <br><br>
-
-  <button type="submit">投稿する</button>
+  <textarea name="comment" required></textarea><br>
+  <button>投稿</button>
 </form>
-
-<p>
-  <a href="{{ url_for('course_view', course_id=course['id']) }}">← 戻る</a>
-</p>
-
 {% endblock %}
