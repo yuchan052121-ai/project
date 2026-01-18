@@ -2,14 +2,15 @@
 <html lang="ja">
 <head>
   <meta charset="utf-8">
-  <title>{{ title or "口コミシステム" }}</title>
+  <title>{{ title or "筑波大学 社会工学類 口コミ" }}</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
   <header>
-    <h1><a href="{{ url_for('index') }}">筑波大学 社会工学類 口コミ</a></h1>
+    <h1><a href="{{ url_for('index') }}">筑波大学 社会工学類 口コミ（改良版）</a></h1>
     <nav>
-      <a href="{{ url_for('index') }}">コース一覧</a>
+      <a href="{{ url_for('index') }}">コース一覧</a> |
+      <a href="{{ url_for('search') }}">検索</a>
     </nav>
     <hr>
   </header>
@@ -27,7 +28,7 @@
   </main>
   <footer>
     <hr>
-    <small>デモ用 — セキュリティや認証は適宜実装してください。</small>
+    <small>デモ用 — 実運用時は認証・セキュリティ対策を必ず実施してください。</small>
   </footer>
 </body>
 </html>
