@@ -1,28 +1,29 @@
 import pandas as pd
 import sqlite3
 
-df = pd.read_excel("data/社会工学類授業_df.xlsx")
+DB = "reviews.db"
+EXCEL = "社会工学類授業_df.xlsx"
 
-conn = sqlite3.connect("reviews.db")
+df = pd.read_excel(EXCEL)
+
+conn = sqlite3.connect(DB)
 c = conn.cursor()
 
-for _, row in df.iterrows():
+for _, r in df.iterrows():
     try:
         c.execute("""
-        INSERT INTO courses (code, title, area, grade, timetable)
+        INSERT INTO courses (code, title, area, year, schedule)
         VALUES (?, ?, ?, ?, ?)
         """, (
-            row["科目番号"],
-            row["授業科目名"],
-            row["専攻区分"],
-            row["標準履修年次"],
-            row["時間割"]
+            r["科目番号"],
+            r["授業科目名"],
+            r["専攻区分"],
+            r["標準履修年次"],
+            r["時間割"]
         ))
-    except Exception as e:
-        print("Error:", e)
-        print("Row:", row)
-        raise
+    except sqlite3.IntegrityError:
+        pass
 
 conn.commit()
 conn.close()
-print("Excel imported")
+print("Excel import finished.")
