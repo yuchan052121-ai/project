@@ -1,3 +1,8 @@
+import os
+
+if os.path.exists(DB_NAME):
+    os.remove(DB_NAME)
+
 import sqlite3
 
 DB_NAME = "reviews.db"
