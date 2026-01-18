@@ -1,6 +1,3 @@
-import os
-from init_db import init_db
-
 if not os.path.exists("reviews.db"):
     init_db()
 
